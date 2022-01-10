@@ -1,3 +1,5 @@
+#!/bin/bash
+
 git pull
 docker rm newhartian
 docker build -t newhartian .
