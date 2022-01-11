@@ -30,8 +30,7 @@ class Dad(commands.Cog):
             if i[-1] in END_OF_SENTENCE_CHARS:
                 name += i[:-1] + " "
                 break
-            else:
-                name += i + " "
+            name += i + " "
         if name == "":
             return
         await message.channel.send("Hi {}, I'm dad!".format(name[:-1]))
