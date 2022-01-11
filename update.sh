@@ -1,8 +1,7 @@
 #!/bin/bash
 
 git pull
-docker rm newhartian
 docker build -t newhartian .
-docker container stop newhartian
+docker stop newhartian
 docker rm newhartian
-docker run -d --name newhartian --env-file .env newhartian
+docker run -d --name newhartian --restart on-failure:5 --env-file .env newhartian

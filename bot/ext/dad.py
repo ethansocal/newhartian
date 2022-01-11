@@ -30,6 +30,8 @@ class Dad(commands.Cog):
                 break
             else:
                 name += i + " "
+        if name == "":
+            return
         await message.channel.send("Hi {}, I'm dad!".format(name[:-1]))
 
 def setup(bot: commands.Bot) -> None:
