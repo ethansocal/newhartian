@@ -7,6 +7,7 @@ class Bot(commands.Bot):
     async def on_ready(self) -> None:
         print("Logged in as {}#{}".format(self.user.name, self.user.discriminator))
         self.load_all_extensions()
+        self.add_all_cog_commands()
 
     def load_all_extensions(self) -> None:
         for file in os.listdir("bot/ext"):

@@ -3,6 +3,7 @@ from contextlib import suppress
 import nextcord
 from nextcord.ext import commands
 from unidecode import unidecode
+import requests
 
 END_OF_SENTENCE_CHARS = [".", "!", "?", ",", ";", ":"]
 
@@ -34,7 +35,14 @@ class DadCog(commands.Cog):
         if name == "":
             return
         await message.channel.send("Hi {}, I'm dad!".format(name[:-1]))
-
+    
+    @commands.Command(name="joke", aliases=["dadjoke"])
+    async def joke(self, ctx: commands.Context) -> None:
+        r = requests.get("https://reddit.com/r/dadjokes/random.json")
+        r.raise_for_status()
+        data = r.json()
+        embed = nextcord.Embed(title=data[0]["data"]["children"][0]["data"]["title"], description=data[0]["data"]["children"][0]["data"]["selftext"])
+        await ctx.send(embed=embed)
 
 def setup(bot: commands.Bot) -> None:
     bot.add_cog(DadCog(bot))
