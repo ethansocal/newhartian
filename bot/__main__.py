@@ -1,6 +1,6 @@
-from .bot import Bot
 import os
 
+from .bot import Bot
 
 print("running")
 bot = Bot("!")

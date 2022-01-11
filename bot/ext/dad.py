@@ -1,8 +1,8 @@
 from contextlib import suppress
 
-from unidecode import unidecode
 import nextcord
 from nextcord.ext import commands
+from unidecode import unidecode
 
 END_OF_SENTENCE_CHARS = [".", "!", "?", ",", ";", ":"]
 
@@ -35,6 +35,7 @@ class Dad(commands.Cog):
         if name == "":
             return
         await message.channel.send("Hi {}, I'm dad!".format(name[:-1]))
+
 
 def setup(bot: commands.Bot) -> None:
     bot.add_cog(Dad(bot))
