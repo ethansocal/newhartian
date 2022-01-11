@@ -1,5 +1,6 @@
 from contextlib import suppress
 
+from unidecode import unidecode
 import nextcord
 from nextcord.ext import commands
 
@@ -14,6 +15,7 @@ class Dad(commands.Cog):
     async def on_message(self, message: nextcord.Message) -> None:
         if message.author.bot or message.author.id == self.bot.user.id:
             return
+        content = unidecode(message.content.lower())
         location = None
         with suppress(ValueError):
             location = message.content.lower().split(" ").index("im")
