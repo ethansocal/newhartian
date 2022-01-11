@@ -36,7 +36,7 @@ class DadCog(commands.Cog):
             return
         await message.channel.send("Hi {}, I'm dad!".format(name[:-1]))
 
-    @commands.Command(name="joke", aliases=["dadjoke"])
+    @commands.command(name="joke", aliases=["dadjoke"])
     async def joke(self, ctx: commands.Context) -> None:
         r = requests.get("https://reddit.com/r/dadjokes/random.json")
         r.raise_for_status()
