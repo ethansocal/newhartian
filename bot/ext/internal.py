@@ -1,11 +1,11 @@
-from nextcord.ext import commands
 from aioconsole import aexec
+from nextcord.ext import commands
 
 
 class InternalCog(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot: commands.Bot = bot
-    
+
     @commands.command()
     async def eval(self, ctx: commands.Context, *, code: str) -> None:
         if ctx.author.id != 710657087100944476:
@@ -20,7 +20,18 @@ class InternalCog(commands.Cog):
         if ref is not None:
             reply = ctx.channel.fetch_message(ref.message_id)
         await ctx.message.delete()
-        await ctx.send(await aexec(code, {"bot": self.bot, "here": ctx.channel, "message": ctx.message, "reply": reply}))
+        await ctx.send(
+            await aexec(
+                code,
+                {
+                    "bot": self.bot,
+                    "here": ctx.channel,
+                    "message": ctx.message,
+                    "reply": reply,
+                },
+            )
+        )
+
 
 def setup(bot: commands.Bot):
     bot.add_cog(InternalCog(bot))
