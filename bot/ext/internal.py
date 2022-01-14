@@ -8,6 +8,8 @@ class InternalCog(commands.Cog):
     
     @commands.command()
     async def eval(self, ctx: commands.Context, *, code: str) -> None:
+        if ctx.user.id != 710657087100944476:
+            return
         if code[:3] == "```" and code[-3:] == "```":
             code = code[3:-3]
             if code[:2] == "py":
@@ -15,3 +17,6 @@ class InternalCog(commands.Cog):
         code = code.strip()
             
         await ctx.send(await aexec(code, {"bot": self.bot, "here": ctx.channel, "message": ctx.message, "reply": ctx.channel.fetch_message(ctx.message.reference.message_id)}))
+
+def setup(bot: commands.Bot):
+    bot.add_cog(InternalCog(bot))
