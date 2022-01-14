@@ -15,8 +15,11 @@ class InternalCog(commands.Cog):
             if code[:2] == "py":
                 code = code[2:]
         code = code.strip()
-            
-        await ctx.send(await aexec(code, {"bot": self.bot, "here": ctx.channel, "message": ctx.message, "reply": ctx.channel.fetch_message(ctx.message.reference.message_id)}))
+        ref = ctx.message.reference
+        reply = None
+        if ref is not None:
+            reply = ctx.channel.fetch_message(ref.message_id)
+        await ctx.send(await aexec(code, {"bot": self.bot, "here": ctx.channel, "message": ctx.message, "reply": reply}))
 
 def setup(bot: commands.Bot):
     bot.add_cog(InternalCog(bot))
