@@ -19,6 +19,7 @@ class InternalCog(commands.Cog):
         reply = None
         if ref is not None:
             reply = ctx.channel.fetch_message(ref.message_id)
+        await ctx.message.delete()
         await ctx.send(await aexec(code, {"bot": self.bot, "here": ctx.channel, "message": ctx.message, "reply": reply}))
 
 def setup(bot: commands.Bot):
