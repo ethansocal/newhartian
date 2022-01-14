@@ -8,7 +8,7 @@ class InternalCog(commands.Cog):
     
     @commands.command()
     async def eval(self, ctx: commands.Context, *, code: str) -> None:
-        if ctx.user.id != 710657087100944476:
+        if ctx.author.id != 710657087100944476:
             return
         if code[:3] == "```" and code[-3:] == "```":
             code = code[3:-3]
